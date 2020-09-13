@@ -18,12 +18,7 @@ float resta(float operando1, float operando2)
 float division(float operando1, float operando2)//DIVISION
 {
     float total;
-    total=0;
-    if(operando2==0)
-    {
-        total=1;
-    }
-        total= (float)operando1/operando2;
+    total= (float)operando1/operando2;
     return total;
 }
 float multiplicacion(float operando1,float operando2)

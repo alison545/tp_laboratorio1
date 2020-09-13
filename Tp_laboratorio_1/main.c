@@ -89,27 +89,17 @@ int main()
             case 4://solo mostrar.
                 printf("A. El resultado de (A+B) es: %f \n", resultadoSuma);
                 printf("B. El resultado de (A-B) es: %f \n", resultadoResta);
-//Problema.
-                if(resultadoDivision==1)
-                {
-                    printf("No es posible dividir por 0\n");
-                }
-                else
-                {
-                    printf("C. El resultado de (A/B) es: %f \n", resultadoDivision);
-                }
-
-//Problema.
+                printf("C. El resultado de (A/B) es: %f \n", resultadoDivision);
                 printf("D. El resultado de (A*B) es: %f \n", resultadoMultiplicacion);
                 printf("E. El factorial de A es: %d y El factorial de B es: %d \n", resultadoPrimerFactorial,resultadoSegundoFactorial);
                 break;
             case 5:
                 printf(" Gracias por usar el programa!!. ");
-                //printf("fUNCIONA.");
+
                 break;
         }
         contador++;
     }while(opcion!=5);
     return 0;
 
-}//TERMINA
+}
