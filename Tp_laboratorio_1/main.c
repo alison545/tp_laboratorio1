@@ -62,11 +62,6 @@ int main()
                 {
                     printf("Ingresar segundo numero (B=y):");
                     scanf("%f", &numero2);
-                    if(numero2==0)
-                    {
-                        numero2=0;
-                        banderaFactorial=1;
-                    }
                     banderaSegundoNumero=1;
                 }
                 break;

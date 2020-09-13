@@ -31,7 +31,6 @@ float multiplicacion(float operando1,float operando2)
 int sacarPrimerFactorial(int operando1)
 {
     int resultado;
-    //int i;
     if(operando1==1)
     {
         return 1;
