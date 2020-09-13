@@ -16,7 +16,6 @@ int main()
     int banderaPrimerNumero=0;
     int banderaSegundoNumero=0;
 
-
     do
     {
         printf("  Calculadora 2.0  \n");
@@ -35,7 +34,7 @@ int main()
             else
             {
                 printf(" 1.Ingreso del primer operando (A=%f): \n", numero1);
-                printf(" 2.Ingreso del primer operando (B=%f): \n",numero2);
+                printf(" 2.Ingreso del primer operando (B=%f): \n", numero2);
             }
         }
         printf(" 3.Calcular todas las operaciones: \n");
@@ -68,7 +67,7 @@ int main()
             case 3://hacer todos los calculos
                 if(banderaPrimerNumero==1 && banderaSegundoNumero==1)
                 {
-                    resultadoSuma=suma(numero1,numero2);//llamada de la funcion
+                    resultadoSuma=suma(numero1,numero2);
                     resultadoResta=resta(numero1,numero2);
                     resultadoDivision=division(numero1,numero2);
                     resultadoMultiplicacion=multiplicacion(numero1,numero2);
@@ -90,11 +89,9 @@ int main()
                 break;
             case 5:
                 printf(" Gracias por usar el programa!!. ");
-
                 break;
         }
         contador++;
     }while(opcion!=5);
     return 0;
-
 }

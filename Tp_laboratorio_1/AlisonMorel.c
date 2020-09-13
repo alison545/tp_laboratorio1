@@ -6,16 +6,16 @@ float suma(float operando1, float operando2 )//Funcion suma.Desarrollo de la fun
     float total;
     total= (float)operando1 + operando2;
     return total;
-}//SUMA
+}
 
 float resta(float operando1, float operando2)
 {
     float total;
     total=(float)operando1-operando2;
     return total;
-}//RESTA
+}
 
-float division(float operando1, float operando2)//DIVISION
+float division(float operando1, float operando2)
 {
     float total;
     total= (float)operando1/operando2;
@@ -26,7 +26,7 @@ float multiplicacion(float operando1,float operando2)
     float total;
     total=(float)operando1*operando2;
     return total;
-}//MULTIPLICACION
+}
 
 int sacarPrimerFactorial(int operando1)
 {
@@ -37,12 +37,12 @@ int sacarPrimerFactorial(int operando1)
     }
     else
     {
-        resultado=operando1*sacarPrimerFactorial(operando1-1);//FACTORIAL - operando 1
+        resultado=operando1*sacarPrimerFactorial(operando1-1);
     }
     return resultado;
 }
 
-int sacarSegundoFactorial(int operando2)//FACTORIAL - operando 2
+int sacarSegundoFactorial(int operando2)
 {
     int resultado;
     if(operando2==1)
