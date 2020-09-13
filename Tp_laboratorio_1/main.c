@@ -49,21 +49,22 @@ int main()
         switch(opcion)
         {
             case 1:
-                if(banderaPrimerNumero==0)
-                {
-                    printf("Ingresar primer numero (A=x):");
-                    scanf("%f", &numero1);
-                    banderaPrimerNumero=1;
-                }
+                    if(banderaPrimerNumero==0)
+                    {
+                      printf("Ingresar primer numero (A=x):");
+                        scanf("%f", &numero1);
+                        banderaPrimerNumero=1;
+                    }
                 break;
             case 2:
-                if(banderaSegundoNumero==0)
-                {
-                    printf("Ingresar segundo numero (B=y):");
-                    scanf("%f", &numero2);
-                    banderaSegundoNumero=1;
-                }
+                    if(banderaSegundoNumero==0)
+                    {
+                        printf("Ingresar segundo numero (B=y):");
+                        scanf("%f", &numero2);
+                        banderaSegundoNumero=1;
+                    }
                 break;
+
             case 3://hacer todos los calculos
                 if(banderaPrimerNumero==1 && banderaSegundoNumero==1)
                 {
@@ -74,6 +75,8 @@ int main()
                     resultadoPrimerFactorial=sacarPrimerFactorial(numero1);
                     resultadoSegundoFactorial=sacarSegundoFactorial(numero2);
                     printf(" Haciendo los calculos, espere por favor... \n");
+                    banderaPrimerNumero=0;
+                    banderaSegundoNumero=0;
                     }
                     else
                     {
@@ -81,11 +84,18 @@ int main()
                     }
                 break;
             case 4://solo mostrar.
-                printf("A. El resultado de (A+B) es: %f \n", resultadoSuma);
-                printf("B. El resultado de (A-B) es: %f \n", resultadoResta);
-                printf("C. El resultado de (A/B) es: %f \n", resultadoDivision);
-                printf("D. El resultado de (A*B) es: %f \n", resultadoMultiplicacion);
-                printf("E. El factorial de A es: %d y El factorial de B es: %d \n", resultadoPrimerFactorial,resultadoSegundoFactorial);
+                if(banderaPrimerNumero==0&& banderaSegundoNumero==0)
+                {
+                    printf("A. El resultado de (A+B) es: %f \n", resultadoSuma);
+                    printf("B. El resultado de (A-B) es: %f \n", resultadoResta);
+                    printf("C. El resultado de (A/B) es: %f \n", resultadoDivision);
+                    printf("D. El resultado de (A*B) es: %f \n", resultadoMultiplicacion);
+                    printf("E. El factorial de A es: %d y El factorial de B es: %d \n", resultadoPrimerFactorial,resultadoSegundoFactorial);
+                }
+                else
+                {
+                    printf("Tiene que ingresar los numeros A y B.")
+                }
                 break;
             case 5:
                 printf(" Gracias por usar el programa!!. ");
