@@ -1,142 +1,115 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-int suma(int operando1, int operando2);//primera funcion.Declaracion.
-//TIPO NOMBRE FUNCION (TIPO_VARIABLE,....)
-int resta(int operando1, int operando2);
-float division(float operando1, float operando2);
-int multiplicacion(int operando1, int operando2);
-int sacarPrimerFactorial(int operando1);
-int sacarSegundoFactorial(int operando2);
-
-//int menu()
-
+#include "AlisonMorel.h"
 int main()
 {
+    int contador=0;
     int opcion;
-    int numero1;
-    int numero2;
-    int resultadoSuma;
-    int resultadoResta;
+    float numero1;
+    float numero2;
+    float resultadoSuma;
+    float resultadoResta;
     float resultadoDivision;
-    int resultadoMultiplicacion;
+    float resultadoMultiplicacion;
     int resultadoPrimerFactorial;
     int resultadoSegundoFactorial;
-   // int resultadoSegundoFactorial;
-    //int resultadoResta;
+    int banderaPrimerNumero=0;
+    int banderaSegundoNumero=0;
 
+    int banderaFactorial=0;
     do
     {
-        printf(" Calculadora 2.0 \n");
+        printf("  Calculadora 2.0  \n");
         printf(" *Menu* \n");
-        printf(" 1.Ingreso del primer operando (A=x): \n");
-        printf(" 2.Ingreso del segundo operando (B=y) : \n");
+        if(contador==0)
+        {
+            printf(" 1.Ingreso del primer operando (A=x): \n");
+            printf(" 2.Ingreso del segundo operando (B=y): \n");
+        }
+        else
+        { if(contador==1)
+            {
+                printf(" 1.Ingreso del primer operando (A=%f): \n", numero1);
+                printf(" 2.Ingreso del segundo operando (B=y): \n");
+            }
+            else
+            {
+                printf(" 1.Ingreso del primer operando (A=%f): \n", numero1);
+                printf(" 2.Ingreso del primer operando (B=%f): \n",numero2);
+            }
+        }
         printf(" 3.Calcular todas las operaciones: \n");
+        printf(" a) Calcular la suma (A+B). \n");
+        printf(" b) Calcular la resta (A-B). \n");
+        printf(" c) Calcular la division (A/B)\n");
+        printf(" d) Calcular la multiplicacion (A*B) \n");
+        printf(" e) Calcular el factorial (A!)\n");
         printf(" 4.Informar resultados: \n");
         printf(" 5.Salir\n");
         scanf("%d", &opcion);
-
         switch(opcion)
         {
             case 1:
-                printf("Ingresar primer numero (A=x):");
-                scanf("%d", &numero1);
+                if(banderaPrimerNumero==0)
+                {
+                    printf("Ingresar primer numero (A=x):");
+                    scanf("%f", &numero1);
+                    banderaPrimerNumero=1;
+                }
                 break;
             case 2:
-                printf("Ingresar segundo numero (B=y):");
-                scanf("%d", &numero2);
+                if(banderaSegundoNumero==0)
+                {
+                    printf("Ingresar segundo numero (B=y):");
+                    scanf("%f", &numero2);
+                    if(numero2==0)
+                    {
+                        numero2=0;
+                        banderaFactorial=1;
+                    }
+                    banderaSegundoNumero=1;
+                }
                 break;
             case 3://hacer todos los calculos
-                resultadoSuma=suma(numero1,numero2);//llamada de la funcion
-                resultadoResta=resta(numero1,numero2);
-                resultadoDivision=division(numero1,numero2);
-                resultadoMultiplicacion=multiplicacion(numero1,numero2);
-                resultadoPrimerFactorial=sacarPrimerFactorial(numero1);
-                resultadoSegundoFactorial=sacarSegundoFactorial(numero2);
-                printf("Haciendo calculos...");
+                if(banderaPrimerNumero==1 && banderaSegundoNumero==1)
+                {
+                    resultadoSuma=suma(numero1,numero2);//llamada de la funcion
+                    resultadoResta=resta(numero1,numero2);
+                    resultadoDivision=division(numero1,numero2);
+                    resultadoMultiplicacion=multiplicacion(numero1,numero2);
+                    resultadoPrimerFactorial=sacarPrimerFactorial(numero1);
+                    resultadoSegundoFactorial=sacarSegundoFactorial(numero2);
+                    printf(" Haciendo los calculos, espere por favor... \n");
+                    }
+                    else
+                    {
+                        printf("Ingrese numero correspondiente, A o B\n");
+                    }
                 break;
             case 4://solo mostrar.
-                printf("A. El resultado de (A+B) es: %d \n", resultadoSuma);
-                printf("B. El resultado de (A-B) es: %d \n", resultadoResta);
-                if(resultadoDivision==0)
+                printf("A. El resultado de (A+B) es: %f \n", resultadoSuma);
+                printf("B. El resultado de (A-B) es: %f \n", resultadoResta);
+//Problema.
+                if(resultadoDivision==1)
                 {
-                    printf("No es posible dividir por 0 \n");
+                    printf("No es posible dividir por 0\n");
                 }
                 else
                 {
                     printf("C. El resultado de (A/B) es: %f \n", resultadoDivision);
                 }
-                printf("D. El resultado de (A*B) es: %d \n", resultadoMultiplicacion);
+
+//Problema.
+                printf("D. El resultado de (A*B) es: %f \n", resultadoMultiplicacion);
                 printf("E. El factorial de A es: %d y El factorial de B es: %d \n", resultadoPrimerFactorial,resultadoSegundoFactorial);
-                break;//("y El factorial de B es: %d \n", resultadoSegundoFactorial);
+                break;
             case 5:
-                printf(" Gracias por usar el programa. ");
+                printf(" Gracias por usar el programa!!. ");
                 //printf("fUNCIONA.");
                 break;
         }
+        contador++;
     }while(opcion!=5);
     return 0;
-}
 
-int suma(int operando1, int operando2 )//Funcion suma.Desarrollo de la funcion.
-{
-    int total;
-    total= operando1 + operando2;
-    return total;
-}
-
-int resta(int operando1, int operando2)
-{
-    int total;
-    total=operando1-operando2;
-    return total;
-}
-
-float division(float operando1, float operando2)
-{
-    float total;
-
-    if(operando2==0)
-    {
-        total=0;
-    }
-    total= (float)operando1/operando2;
-    return total;
-}
-
-int multiplicacion(int operando1,int operando2)
-{
-    int total;
-    total=operando1*operando2;
-    return total;
-}
-
-int sacarPrimerFactorial(int operando1)
-{
-    int resultado;
-    //int i;
-    if(operando1==1)
-    {
-        return 1;
-    }
-    else
-    {
-        resultado=operando1*sacarPrimerFactorial(operando1-1);//operando 1
-    }
-    return resultado;
-}
-
-int sacarSegundoFactorial(int operando2)//operando 2
-{
-    int resultado;
-    //int i;
-    if(operando2==1)
-    {
-        return 1;
-    }
-    else
-    {
-        resultado=operando2*sacarSegundoFactorial(operando2-1);
-    }
-    return resultado;
-}
+}//TERMINA
