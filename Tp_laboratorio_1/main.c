@@ -16,7 +16,7 @@ int main()
     int banderaPrimerNumero=0;
     int banderaSegundoNumero=0;
 
-    int banderaFactorial=0;
+
     do
     {
         printf("  Calculadora 2.0  \n");
