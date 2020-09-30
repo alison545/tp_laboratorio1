@@ -94,7 +94,7 @@ int main()
                 }
                 else
                 {
-                    printf("Tiene que ingresar los numeros A y B.")
+                    printf("Tiene que ingresar los numeros A y B.");
                 }
                 break;
             case 5:
