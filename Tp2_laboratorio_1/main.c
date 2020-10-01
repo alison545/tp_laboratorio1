@@ -33,7 +33,7 @@ int main()
 
      int retornoIsEmpty;//no me los toma, no se por que
     int retornoCargarEmpleados;
-    int retornoBuscarLibre;//no me los toma, no se por que
+    int indiceLibre;
     eEmployee listaMisEmpleados[TAMANIO];
     do
     {
@@ -50,7 +50,7 @@ int main()
             {
                 printf("No hay espacio libre :");
             }
-            retornoBuscarLibre = buscarLibre (listaMisEmpleados,TAMANIO);
+            indiceLibre = crearDatoEmpleado()
 
             break;
         case 2:
