@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define TAMANIO 10
-#define FALSE 1//OCUPADO
+#define FALSE -1//OCUPADO
 #define TRUE 0//VACIO
 
 typedef  struct
@@ -19,10 +19,10 @@ typedef  struct
 int menu();//MENU!
 int subMenu();
 
-eEmployee crearDatoEmpleado(int idAutomatico);//este es el empleado
-int buscarLibre(eEmployee listaEmpleados[], int cantidad);
-int estadoIsEmpty(eEmployee listaEmpleados[],int cantidad);//1era funcion de las que figuran en las consignas del tp.
-int cargarEmpleados(eEmployee listaEmpleados[], int cantidad);//2da funcion de las que figuran en las consignas del tp.
+eEmployee crearDatoEmpleado();//este es el empleado
+int buscarLibre(eEmployee [], int cantidad);
+int estadoIsEmpty(eEmployee [],int cantidad);//1era funcion de las que figuran en las consignas del tp.
+int cargarEmpleados(eEmployee [], int cantidad);//2da funcion de las que figuran en las consignas del tp.
 
 
 //------------------------------------------------MAIN---------------------------
@@ -31,10 +31,10 @@ int main()
     int opciones;
     int subMenuOpciones;
 
-     int retornoIsEmpty;//no me los toma, no se por que
+
     int retornoCargarEmpleados;
-    int indiceLibre;
     eEmployee listaMisEmpleados[TAMANIO];
+    eEmployee miEmpleado;
     do
     {
         opciones=menu();
@@ -43,15 +43,12 @@ int main()
         {
         case 1:
 // Se debe permitir ingresar un empleado calculando automáticamente el número de Id. El resto de los campos se le pedirá al usuario
-
-            retornoIsEmpty = estadoIsEmpty(listaMisEmpleados,TAMANIO);
+            miEmpleado = crearDatoEmpleado();
             retornoCargarEmpleados = cargarEmpleados(listaMisEmpleados,TAMANIO);
             if(retornoCargarEmpleados !=0)
             {
                 printf("No hay espacio libre :");
             }
-            indiceLibre = crearDatoEmpleado()
-
             break;
         case 2:
 // Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido o Salario o Sector
@@ -114,7 +111,7 @@ int subMenu()
 
 int buscarLibre (eEmployee listaEmpleados[], int cantidad)
 {
-    int indice;
+    int indice = FALSE;
     int i;
     for(i=0;i<cantidad;i++)
     {
@@ -137,11 +134,12 @@ int estadoIsEmpty(eEmployee listaEmpleados[],int cantidad)
     return 0;
 }
 
-eEmployee crearDatoEmpleado(int idAutomatico)
+eEmployee crearDatoEmpleado()
 {
     eEmployee empleado;
-    //int idEmpleado;
-    idAutomatico= idAutomatico+1;
+    int idEmpleado;
+
+    idEmpleado = buscarLibre(listaEmpleados[],cantidad)+1;
 
     printf("Ingresar nombre: ");
     fflush(stdin);
@@ -162,9 +160,12 @@ eEmployee crearDatoEmpleado(int idAutomatico)
 int cargarEmpleados(eEmployee listaEmpleados[], int cantidad)
 {
     int i;
-    for(i=0;i<cantidad;i++)
+    i = buscarLibre(listaEmpleados,cantidad);
+
+    if(i != -1 )
     {
-        listaEmpleados[i] = crearDatoEmpleado();
+        listaEmpleados[i] = crearDatoEmpleado(idAutomatico);
     }
+
     return 0;
 }
