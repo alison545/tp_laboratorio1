@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TAMANIO 3
+#define TAMANIO 1000
 #define FALSE -1//OCUPADO
 #define TRUE 0//VACIO
 #define ELIMINADO 1
