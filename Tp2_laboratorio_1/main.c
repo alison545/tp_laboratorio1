@@ -1,40 +1,24 @@
 //Morel Alison.
 #include <stdio.h>
 #include <stdlib.h>
-#define TAMANIO 10
-#define FALSE -1//OCUPADO
-#define TRUE 0//VACIO
 
-typedef  struct
-{
-    int id;
-    char name[51];
-    char lastName[51];
-    float salary;
-    int sector;
-    int isEmpty;
-}eEmployee;
-
-//Prototipos de funciones.
-int menu();//MENU!
-int subMenu();
-
-eEmployee crearDatoEmpleado();//este es el empleado
-int buscarLibre(eEmployee [], int cantidad);
-int estadoIsEmpty(eEmployee [],int cantidad);//1era funcion de las que figuran en las consignas del tp.
-int cargarEmpleados(eEmployee [], int cantidad);//2da funcion de las que figuran en las consignas del tp.
+#include "FuncionesEmpleados.h"
+#define TAMANIO 1000
 
 
-//------------------------------------------------MAIN---------------------------
 int main()
 {
     int opciones;
     int subMenuOpciones;
-
-
-    int retornoCargarEmpleados;
+    int idEmpleado;
+    idEmpleado=0;
+    int identidad;
+    identidad=0;
+    int contadorEmpleados;
+    contadorEmpleados=0;
+    float promedio;
+    int totalSalarios;
     eEmployee listaMisEmpleados[TAMANIO];
-    eEmployee miEmpleado;
     do
     {
         opciones=menu();
@@ -42,130 +26,71 @@ int main()
         switch(opciones)
         {
         case 1:
-// Se debe permitir ingresar un empleado calculando automáticamente el número de Id. El resto de los campos se le pedirá al usuario
-            miEmpleado = crearDatoEmpleado();
-            retornoCargarEmpleados = cargarEmpleados(listaMisEmpleados,TAMANIO);
-            if(retornoCargarEmpleados !=0)
-            {
-                printf("No hay espacio libre :");
-            }
+           if((cargarEmpleados(listaMisEmpleados,TAMANIO,idEmpleado,contadorEmpleados))==1)
+           {
+               printf("Se cargo con exito.\n");
+               contadorEmpleados++;
+           }
+           else
+           {
+               printf("No hay mas espacio para cargar el empleado.\n");
+           }
             break;
         case 2:
-// Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido o Salario o Sector
-
-
+            if(contadorEmpleados!=0)
+            {
+               if((modificarEmpleado(listaMisEmpleados,identidad,TAMANIO))==1)
+                {
+                    printf("Modificacion hecha!\n");
+                }
+                else
+                {
+                    printf("El numero de Id es incorrecto, intente de nuevo...\n");
+                }
+            }
+            else
+            {
+                printf("Ingresar empleado por favor...\n");
+            }
+            imprimirEmpleados(listaMisEmpleados,TAMANIO);
             break;
         case 3:
-//Se ingresará el Número de Id y se eliminará el empleado del sistema.
-
-            break;
-
-        case 4:
-            //LLAMADA A LA FUNCION DE SUBMENU.
-            do
+            if(contadorEmpleados!=0)
             {
-                subMenuOpciones = subMenu ();
-                switch(subMenuOpciones)
+              if((eliminarEmpleado(listaMisEmpleados,identidad,TAMANIO))==0)
+               {
+                   printf("Se elimino con exito!.\n");
+               }
+               else
                 {
-                case 1:
-                     printf("SUBMENU1");//LLAMADA FUNCION DE ORDENAR POR APELLIDO Y SECTOR.
-                    break;
-                case 2:
-                    printf("submenu 2");//LLAMADA FUNCION DE --> Total y promedio de los salarios, y cuántos empleados superan el salario promedio.
-                    break;
+                    printf("No existe el id, intente de nuevo...\n");
                 }
-            }while(subMenuOpciones !=1 && subMenuOpciones !=2);
+            }
+            break;
+        case 4:
+            if(contadorEmpleados!=0)
+            {
+               do
+                {
+                subMenuOpciones = subMenu ();
+                    switch(subMenuOpciones)
+                    {
+                        case 1:
+                        ordenarEmpleados(listaMisEmpleados,TAMANIO);
+                        imprimirEmpleados(listaMisEmpleados,TAMANIO);
+                            break;
+                        case 2:
+                        totalSalarios=salariosTotal(listaMisEmpleados,TAMANIO);
+                        promedio=totalPromedioSalarios(listaMisEmpleados,TAMANIO,totalSalarios);
+                        sacarSalarioPromedio(listaMisEmpleados,TAMANIO,promedio,totalSalarios);
+                            break;
+                    }
+                }while(subMenuOpciones !=3);
+            }
             break;
         }
     }while(opciones!=5);
 
     return 0;
 }
-//--------------------------------------------------TERMINA MAIN-----------------------------------------------------------
 
-int menu () //MENU!
-{
-    int opcion;
-
-        printf("1- Altas: \n ");/* Se debe permitir ingresar un empleado calculando automáticamente el número
-                                    de Id. El resto de los campos se le pedirá al usuario*/
-        printf("2- Modificar, ingresar numero de ID: \n"); /*Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido
-                                        o Salario o Sector*/
-        printf("3- Baja:\n");//Se ingresará el Número de Id y se eliminará el empleado del sistema.
-        printf("4- Informar: \n");//Despues hacer un submenu.
-
-        printf("5- Terminar proceso: ");
-        scanf("%d",&opcion);
-        return opcion;
-}
-
-int subMenu()
-{
-    int opcionSubMenu;
-    printf("1- Listado de los empleados ordenados alfabéticamente por Apellido y Sector.");
-    printf("2- Total y promedio de los salarios, y cuántos empleados superan el salario promedio. ");
-    scanf("%d",&opcionSubMenu);
-
-    return opcionSubMenu;
-}
-
-int buscarLibre (eEmployee listaEmpleados[], int cantidad)
-{
-    int indice = FALSE;
-    int i;
-    for(i=0;i<cantidad;i++)
-    {
-        if(listaEmpleados[i].isEmpty == TRUE)
-        {
-            indice = i;
-            break;
-        }
-    }
-    return indice;
-}
-
-int estadoIsEmpty(eEmployee listaEmpleados[],int cantidad)
-{
-    int i;
-    for(i=0;i<cantidad;i++)
-    {
-        listaEmpleados[i].isEmpty = TRUE;
-    }
-    return 0;
-}
-
-eEmployee crearDatoEmpleado()
-{
-    eEmployee empleado;
-    int idEmpleado;
-
-    idEmpleado = buscarLibre(listaEmpleados[],cantidad)+1;
-
-    printf("Ingresar nombre: ");
-    fflush(stdin);
-    scanf("%[^\n]", empleado.name);
-    printf("Ingresar apellido: ");
-    fflush(stdin);
-    scanf("%[^\n]", empleado.lastName);
-    printf("Ingresar salario: ");
-    scanf("%f",&empleado.salary);
-    printf("Ingresar sector: ");
-    scanf("%d",&empleado.sector);
-
-    empleado.isEmpty = FALSE;
-
-    return empleado;
-}
-
-int cargarEmpleados(eEmployee listaEmpleados[], int cantidad)
-{
-    int i;
-    i = buscarLibre(listaEmpleados,cantidad);
-
-    if(i != -1 )
-    {
-        listaEmpleados[i] = crearDatoEmpleado(idAutomatico);
-    }
-
-    return 0;
-}
